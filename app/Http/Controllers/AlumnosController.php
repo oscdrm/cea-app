@@ -93,9 +93,6 @@ class AlumnosController extends Controller
             $target = $email.".".$img_alumno->getClientOriginalExtension();
             $user_photo->resize(200,200);
             $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
-            if (!file_exists(public_path($ruta))) {
-                mkdir(public_path($ruta), 777, true);
-            }
             $user_photo->save($ruta.$target);
             $target = 'img/alumnos/'.$email."/".$img_alumno->getClientOriginalExtension();
             $alumno->photo = $target;
@@ -127,9 +124,6 @@ class AlumnosController extends Controller
                 $target = $emailTutor.".".$img_tutor->getClientOriginalExtension();
                 $user_photo->resize(200,200);
                 $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
-                if (!file_exists(public_path($ruta))) {
-                    mkdir(public_path($ruta), 777, true);
-                }
                 $user_photo->save($ruta.$target);
                 $target = 'img/alumnos/'.$email."/".$img_tutor->getClientOriginalExtension();
                 $tutor->photo = $target;
