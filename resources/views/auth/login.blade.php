@@ -13,7 +13,7 @@
 
             </div>
             <h3>Bienvenido a CEA payment system</h3>
-            <p>Por favor inicia sesión para entrar en acción</p>
+            <p>Por favooooor inicia sesión para entrar en acción</p>
             <form class="m-t" role="form"  method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
