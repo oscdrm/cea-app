@@ -76,8 +76,6 @@ class AlumnosController extends Controller
 
         $alumno = new Alumno();
         $alumno->name = $request->input('name');
-        $name = $request->input('name');
-        $lastName = $request->input('lastName');
         $alumno->lastName = $request->input('lastName');
         $email = $request->input('email');
         $alumno->email = $email;
@@ -92,9 +90,9 @@ class AlumnosController extends Controller
             $user_photo = Image::make($img_alumno);
             $target = $email.".".$img_alumno->getClientOriginalExtension();
             $user_photo->resize(200,200);
-            $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
+            $ruta = public_path().'/img/alumnos/';
             $user_photo->save($ruta.$target);
-            $target = 'img/alumnos/'.$email."/".$img_alumno->getClientOriginalExtension();
+            $target = 'img/alumnos/'.$email.".".$img_alumno->getClientOriginalExtension();
             $alumno->photo = $target;
         }
         
@@ -122,10 +120,10 @@ class AlumnosController extends Controller
             if($img_tutor){
                 $tutor_photo = Image::make($img_tutor);
                 $target = $emailTutor.".".$img_tutor->getClientOriginalExtension();
-                $user_photo->resize(200,200);
-                $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
-                $user_photo->save($ruta.$target);
-                $target = 'img/alumnos/'.$email."/".$img_tutor->getClientOriginalExtension();
+                $tutor_photo->resize(200,200);
+                $ruta = public_path().'/img/alumnos/';
+                $tutor_photo->save($ruta.$target);
+                $target = 'img/alumnos/'.$emailTutor.".".$img_tutor->getClientOriginalExtension();
                 $tutor->photo = $target;
             }
 
@@ -245,7 +243,18 @@ class AlumnosController extends Controller
             $tutor->name = $request->input('nameTutor');
             $tutor->lastName = $request->input('lastNameTutor');
             $tutor->email = $request->input('emailTutor');
+            $emailTutor = $request->input('emailTutor');
             $tutor->phone = $request->input('phoneTutor');
+            $img_tutor = $request->file('photo_tutor');
+            if($img_tutor){
+                $tutor_photo = Image::make($img_tutor);
+                $target = $emailTutor.".".$img_tutor->getClientOriginalExtension();
+                $tutor_photo->resize(200,200);
+                $ruta = public_path().'/img/alumnos/';
+                $tutor_photo->save($ruta.$target);
+                $target = 'img/alumnos/'.$emailTutor.".".$img_tutor->getClientOriginalExtension();
+                $tutor->photo = $target;
+            }
             $tutor->save();          
         }else{
             if($request->input('nameTutor') && $request->input('lastNameTutor')){
@@ -253,8 +262,20 @@ class AlumnosController extends Controller
                 $tutor->name = $request->input('nameTutor');
                 $tutor->lastName = $request->input('lastNameTutor');
                 $tutor->email = $request->input('emailTutor');
+                $emailTutor = $request->input('emailTutor');
                 $tutor->phone = $request->input('phoneTutor');
                 $tutor->alumno_id = $alumno->id;
+                $img_tutor = $request->file('photo_tutor');
+                if($img_tutor){
+                    $tutor_photo = Image::make($img_tutor);
+                    $target = $emailTutor.".".$img_tutor->getClientOriginalExtension();
+                    $tutor_photo->resize(200,200);
+                    $ruta = public_path().'/img/alumnos/';
+                    $tutor_photo->save($ruta.$target);
+                    $target = 'img/alumnos/'.$emailTutor.".".$img_tutor->getClientOriginalExtension();
+                    $tutor->photo = $target;
+                }
+                
     
                 $tutor->save();
             }
