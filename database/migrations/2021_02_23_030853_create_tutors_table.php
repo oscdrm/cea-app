@@ -19,7 +19,7 @@ class CreateTutorsTable extends Migration
             $table->string('lastName');
             $table->string('email');
             $table->string('phone');
-
+            $table->string('photo')->nullable();
             $table->unsignedBigInteger('alumno_id');
             $table->foreign('alumno_id')->references('id')->on('alumnos')->onUpdate('cascade')->onDelete('cascade');
 

@@ -76,6 +76,8 @@ class AlumnosController extends Controller
 
         $alumno = new Alumno();
         $alumno->name = $request->input('name');
+        $name = $request->input('name');
+        $lastName = $request->input('lastName');
         $alumno->lastName = $request->input('lastName');
         $email = $request->input('email');
         $alumno->email = $email;
@@ -90,9 +92,12 @@ class AlumnosController extends Controller
             $user_photo = Image::make($img_alumno);
             $target = $email.".".$img_alumno->getClientOriginalExtension();
             $user_photo->resize(200,200);
-            $ruta = public_path().'/img/alumnos/';
+            $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
+            if (!file_exists(public_path($ruta))) {
+                mkdir(public_path($ruta), 777, 'R');
+            }
             $user_photo->save($ruta.$target);
-            $target = 'img/alumnos/'.$email.".".$img_alumno->getClientOriginalExtension();
+            $target = 'img/alumnos/'.$email."/".$img_alumno->getClientOriginalExtension();
             $alumno->photo = $target;
         }
         
@@ -113,8 +118,22 @@ class AlumnosController extends Controller
             $tutor->name = $request->input('nameTutor');
             $tutor->lastName = $request->input('lastNameTutor');
             $tutor->email = $request->input('emailTutor');
+            $emailTutor = $request->input('emailTutor');
             $tutor->phone = $request->input('phoneTutor');
             $tutor->alumno_id = $alumno->id;
+            $img_tutor = $request->file('photo_tutor');
+            if($img_tutor){
+                $tutor_photo = Image::make($img_tutor);
+                $target = $emailTutor.".".$img_tutor->getClientOriginalExtension();
+                $user_photo->resize(200,200);
+                $ruta = public_path().'/img/alumnos/'.$name.$lastName."/";
+                if (!file_exists(public_path($ruta))) {
+                    mkdir(public_path($ruta), 777, 'R');
+                }
+                $user_photo->save($ruta.$target);
+                $target = 'img/alumnos/'.$email."/".$img_tutor->getClientOriginalExtension();
+                $tutor->photo = $target;
+            }
 
             $tutor->save();
         }

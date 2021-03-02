@@ -154,6 +154,22 @@
                 <h5>Tutor</h5>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Sube una imagen</label>
+                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                        <div class="form-control" data-trigger="fileinput">
+                            <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                        <span class="fileinput-filename"></span>
+                        </div>
+                        <span class="input-group-addon btn btn-default btn-file">
+                            <span class="fileinput-new">Select file</span>
+                            <span class="fileinput-exists">Cambiar</span>
+                            <input type="file" name="photo_tutor"/>
+                        </span>
+                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                    </div> 
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Nombre(s)</label>
                     <div class="col-sm-10"><input name="nameTutor" type="text" class="form-control" value="{{old('name')}}"></div>
                 </div>
