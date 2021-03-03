@@ -48,19 +48,32 @@ class MovimientosCajaController extends Controller
 
         //Validaciones
         $rules = [
-            'monto_pago' => 'required',
-            'folio' => 'unique:movimientos_cajas'
+            'monto_pago' => 'required'
         ];
 
         // Validator::make($request, $rules);
         $this->validate($request, $rules, $messages);
         try{
+            $folio = "";
+            if(!empty($request->input('folio'))){
+                $folio = $request->input('folio');
+                $folioObj = MovimientosCaja::where('folio', '=', $folio)->count();
+
+                if($folioObj > 0){
+                    $errors = [];
+                    $errors['folio_duplicado'] = "Este folio ya se ha registrado anteriormente";
+        
+                    return  back()->withErrors($errors);
+                }
+
+            }
+
             $payment = new MovimientosCaja();
             $payment->alumno_id = $request->input('alumno');
             $payment->otro_alumno = $request->input('otro_alumno');
             $payment->concepto_id = $request->input('concepto');
             $payment->otro_concepto = $request->input('otro_concepto');
-            $payment->folio = $request->input('folio');
+            $payment->folio = $folio;
             //$payment->folio = $request->input('folio');
             $payment->monto_pago = $request->input('monto_pago');
             $payment->nota = $request->input('nota');
