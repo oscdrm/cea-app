@@ -9,6 +9,7 @@ use App\Concepto;
 use App\Alumno;
 use App\MetodoPago;
 use App\Adeudo;
+use Carbon\Carbon;
 
 class MovimientosCajaController extends Controller
 {
@@ -19,7 +20,19 @@ class MovimientosCajaController extends Controller
 
     public function index()
     {   
-        $movimientos = MovimientosCaja::orderBy('created_at', 'DESC')->get();
+        if(Auth::user()->role_id == 1){
+            $movimientos = MovimientosCaja::orderBy('created_at', 'DESC')->get();
+        }
+        
+        if(Auth::user()->role_id == 2){
+            $user = Auth::user()->id;
+            $movimientos = MovimientosCaja::where('cashier_id', '=', $user)
+                      ->whereBetween('created_at', [Carbon::now()
+                      ->startOfWeek(), Carbon::now()->endOfWeek()])
+                      ->orderBy('created_at', 'desc')
+                      ->paginate();
+        }
+        
         return view('movimientos/index')->with(compact('movimientos'));
     }
 
@@ -89,6 +102,8 @@ class MovimientosCajaController extends Controller
                 $payment->adeudo_id = $adeudo;
                 if($adeudoObj->monto_restante == $request->input('monto_pago')){
                     $adeudoObj->status_adeudo_id = 2;
+                    $adeudoObj->monto_restante = 0;
+                    $adeudoObj->nota = "El alumno ha pagado el total del adeudo";
                 }else{
                     $resto = $adeudoObj->monto_pago - $request->input('monto_pago');
                     $adeudoObj->nota = "El alumno aun adeuda un monto de: $".$resto;

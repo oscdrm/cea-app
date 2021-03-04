@@ -153,7 +153,7 @@
                                 <li><a href="/adeudos">Adeudos</a></li>
 
                                 @if(auth()->user()->role->id == 1)
-                                    <li><a href="/earning">Corte de Caja</a></li>
+                                    <li><a href="/corteCaja">Corte de Caja</a></li>
                                     <!--<li><a href="/movements">Movimientos caja</a></li>-->
                                 @endif
                             </ul>

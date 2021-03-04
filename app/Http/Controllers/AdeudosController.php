@@ -18,7 +18,7 @@ class AdeudosController extends Controller
 
     public function index()
     {   
-        $adeudos = Adeudo::orderBy('created_at', 'DESC')->orderBy('status_adeudo_id', 'ASC')->get();
+        $adeudos = Adeudo::where('status_adeudo_id', '=', 1)->orderBy('created_at', 'DESC')->orderBy('status_adeudo_id', 'ASC')->get();
         return view('adeudos/index')->with(compact('adeudos'));
     }
 
