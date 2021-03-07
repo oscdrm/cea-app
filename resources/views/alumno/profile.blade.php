@@ -27,7 +27,7 @@
 
                 <div>
                     <div class="ibox-content no-padding border-left-right">
-                        <img alt="image" class="img-responsive" src="{{asset($alumno->photo)}}">
+                        <img alt="image" class="img-responsive" src="{{$alumno->photo ? asset($alumno->photo) : asset('img/profile.jpg')}}">
                     </div>
 
                     <div class="ibox-content profile-content">
