@@ -49,11 +49,12 @@
                         <p>Status: {{$alumno->status->name}}</p>   
 
                         <br>
-
-                        <p><b>Tutor:</b></p>
-                        <p>Nombre: {{$tutor->name}} {{$tutor->lastName}}</p>
-                        <p>email: {{$tutor->email}}</p>
-                        <p>Teléfono: {{$tutor->phone}}</p>
+                        @if(!empty($tutor))
+                            <p><b>Tutor:</b></p>
+                            <p>Nombre: {{$tutor->name}} {{$tutor->lastName}}</p>
+                            <p>email: {{$tutor->email}}</p>
+                            <p>Teléfono: {{$tutor->phone}}</p>
+                        @endif
 
                         <div class="user-button">
                             <!--<div class="row">
