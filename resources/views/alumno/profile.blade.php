@@ -149,13 +149,15 @@
                 language: {
                     search: "Buscar en la tabla:",
                     info:   "Mostrando del _START_ al _END_ de _TOTAL_ pagos",
+                    infoEmpty:      "No existen registros, 0 elementos",
                     lengthMenu:    "Mostrar _MENU_ registros",
                     paginate: {
                         first:      "Primero",
                         previous:   "Anterior",
                         next:       "Siguiente",
                         last:       "Ultimo"
-                    }
+                    },
+                    emptyTable:     "Aun no existe ningun registro"
                 }
 
             });
