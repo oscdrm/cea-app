@@ -8,6 +8,7 @@ use App\Alumno;
 use App\Carrera;
 use App\Modalidad;
 use App\TipoInscripcion;
+use App\MovimientosCaja;
 use App\StatusAlumno;
 use Carbon\Carbon;
 use App\Direccion;
@@ -291,6 +292,15 @@ class AlumnosController extends Controller
         $alumno->delete();
 
         return back();
+    }
+
+    public function profile($id)
+    {   
+        $alumno = Alumno::find($id);
+        $movimientos = MovimientosCaja::where('alumno_id', '=', $id)->get();
+        $direccion = Direccion::where('alumno_id', '=', $id)->first();
+        $tutor = Tutor::where('alumno_id', '=', $id)->first();
+        return view('alumno/profile')->with(compact('alumno', 'movimientos', 'direccion', 'tutor'));
     }
 
 }

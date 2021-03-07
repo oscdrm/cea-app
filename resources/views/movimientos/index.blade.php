@@ -36,7 +36,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
                                     <th>ID movimiento</th>
@@ -47,6 +47,7 @@
                                     <th>Concepto</th>
                                     <th>Metodo de pago</th>
                                     <th>Registrado por:</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -106,5 +107,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [],
+                language: {
+                    search: "Buscar en la tabla:",
+                    info:   "Mostrando del _START_ al _END_ de _TOTAL_ alumno",
+                    lengthMenu:    "Mostrar _MENU_ registros",
+                    paginate: {
+                        first:      "Primero",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    }
+                }
+
+            });
+
+        });
+
+    </script>
 
 @endsection

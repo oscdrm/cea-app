@@ -44,6 +44,8 @@
 
     <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
 
+    <link href="{{asset('css/plugins/dataTables/datatables.min.css')}} rel="stylesheet">
+
 
     <!--  SCRIPTS INSPINIA  -->
 
@@ -100,6 +102,8 @@
 
    <!-- Sweet alert -->
    <script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>
+
+   <script src="{{asset('js/plugins/dataTables/datatables.min.js')}}"></script>
 
 </head>
 <body>

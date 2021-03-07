@@ -1765,8 +1765,13 @@ table.dataTable thead .sorting_desc_disabled {
   float: left;
 }
 .dataTables_filter label {
-  margin-right: 5px;
+  margin-left: 25px;
 }
+
+.dataTables_info{
+  margin: 10px 0px;
+}
+
 .html5buttons {
   float: right;
 }

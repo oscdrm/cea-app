@@ -89,6 +89,7 @@ Route::middleware(['auth', 'cashier'])->group(function () {
     Route::post('/alumno', 'AlumnosController@store'); //Guardar 
     Route::get('/alumno/edit/{id}', 'AlumnosController@edit'); //Editar
     Route::post('/alumno/edit/{id}', 'AlumnosController@update'); //actualizar
+    Route::get('/alumno/profile/{id}', 'AlumnosController@profile'); //perfil
 
     //Rutas para MOvimientos Caja
     Route::get('/movimientos', 'MovimientosCajaController@index'); //Listado

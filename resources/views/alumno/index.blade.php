@@ -36,7 +36,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -47,6 +47,7 @@
                                     <th>Modalidad</th>
                                     <th>Tipo Inscripción</th>
                                     <th>Status</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +55,7 @@
                                 @foreach($alumnos as $alumno)
                                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                         <td>
-                                            <a href="{{ url('alumno/edit', $alumno) }}"> {{ $alumno->name  }} {{ $alumno->lastName }}</a>
+                                            <a href="{{ url('alumno/profile', $alumno) }}"> {{ $alumno->name  }} {{ $alumno->lastName }}</a>
                                         </td>
                                         <td>
                                             {{ $alumno->email }}
@@ -104,5 +105,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [],
+                language: {
+                    search: "Buscar en la tabla:",
+                    info:   "Mostrando del _START_ al _END_ de _TOTAL_ alumno",
+                    lengthMenu:    "Mostrar _MENU_ registros",
+                    paginate: {
+                        first:      "Primero",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    }
+                }
+
+            });
+
+        });
+
+    </script>
 
 @endsection
