@@ -32,7 +32,9 @@
 
                     <div class="ibox-content profile-content">
                         <h4><strong>{{$alumno->name}} {{$alumno->lastName}}</strong></h4>
-                        <p><i class="fa fa-map-marker"></i> {{$direccion->calle}} {{$direccion->numero}}  {{$direccion->colonia}} {{$direccion->cp}}</p>
+                        @if(!empty($direccion))
+                            <p><i class="fa fa-map-marker"></i> {{$direccion->calle}} {{$direccion->numero}}  {{$direccion->colonia}} {{$direccion->cp}}</p>
+                        @endif
                         <h5>
                             Informacion escolar:
                         </h5>
