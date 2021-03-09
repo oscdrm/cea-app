@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!--<title>{{ config('app.name', 'Bienvenido a InnovaDent Huetamo') }}</title>-->
+    <!--<title>{{ config('app.name', '') }}</title>-->
     <title>Bienvenido a CEA payment system</title>
     <!-- Scripts -->
     
