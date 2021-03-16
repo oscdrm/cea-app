@@ -108,7 +108,8 @@
                             <th data-hide="phone">Alumno</th>
                             <th data-hide="phone">Concepto</th>
                             <th data-hide="phone">Monto</th>
-                            <th data-hide="phone,tablet" >fecha</th>
+                            <th data-hide="phone,tablet" >Fecha</th>
+                            <th data-hide="phone,tablet" >Acción</th>
                         </tr>
                         </thead>
                         <tbody>
