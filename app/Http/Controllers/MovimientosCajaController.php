@@ -21,7 +21,7 @@ class MovimientosCajaController extends Controller
     public function index()
     {   
         if(Auth::user()->role_id == 1){
-            $movimientos = MovimientosCaja::orderBy('created_at', 'DESC')->get();
+            $movimientos = MovimientosCaja::orderBy('created_at', 'ASC')->get();
         }
         
         if(Auth::user()->role_id == 2){
@@ -29,7 +29,7 @@ class MovimientosCajaController extends Controller
             $movimientos = MovimientosCaja::where('cashier_id', '=', $user)
                       ->whereBetween('created_at', [Carbon::now()
                       ->startOfWeek(), Carbon::now()->endOfWeek()])
-                      ->orderBy('created_at', 'desc')
+                      ->orderBy('created_at', 'asc')
                       ->paginate();
         }
         
