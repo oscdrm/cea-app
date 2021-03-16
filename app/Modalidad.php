@@ -10,4 +10,9 @@ class Modalidad extends Model
     {
         return $this->hasMany(Alumno::class);
     }
+
+    public function costosCarrera()
+    {
+        return $this->hasMany(CostoCarrera::class);
+    }
 }

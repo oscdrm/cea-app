@@ -111,6 +111,18 @@
                 </div>
 
                 <div class="form-group">
+                                <label class="col-sm-2 control-label">Descuentos</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="Selecciona un descuento" name="descuentos[]" id="descuentos" class="chosen-select" multiple  tabindex="2">
+                                        <option value="">Selecciona un descuento</option>
+                                        @foreach ($descuentos as $descuento)
+                                            <option value="{{$descuento->id}}">{{$descuento->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Status</label>
                     <div class="col-sm-10">
                         <select data-placeholder="Selecciona un status" name="status" class="chosen-select"  tabindex="2">

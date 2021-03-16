@@ -45,4 +45,9 @@ class Alumno extends Model
     {
         return $this->hasMany(MovimientosCaja::class);
     }
+
+    public function descuentos(){
+        return $this->belongsToMany(Descuento::class, 'descuento_alumno');
+    }
+
 }

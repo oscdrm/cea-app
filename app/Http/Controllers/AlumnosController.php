@@ -13,6 +13,7 @@ use App\StatusAlumno;
 use Carbon\Carbon;
 use App\Direccion;
 use App\Tutor;
+use App\Descuento;
 use Image;
 
 class AlumnosController extends Controller
@@ -34,7 +35,8 @@ class AlumnosController extends Controller
         $modalidades = Modalidad::all();
         $tipoInscripciones = TipoInscripcion::all();
         $statuses = StatusAlumno::all();
-        return view('alumno.create')->with(compact('carreras', 'modalidades', 'tipoInscripciones', 'statuses'));
+        $descuentos = Descuento::All();
+        return view('alumno.create')->with(compact('carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos'));
     }
 
     public function store(Request $request)
@@ -131,6 +133,17 @@ class AlumnosController extends Controller
             $tutor->save();
         }
 
+        $descuentosReq = $request->input('descuentos');
+        if($descuentosReq){
+            foreach($descuentosReq as $dr){
+                $descuento = Descuento::find($dr);
+                $alumno->descuentos()->attach($descuento);
+            }
+
+        }
+        
+        
+
         return redirect('/alumno');
     }
 
@@ -141,6 +154,7 @@ class AlumnosController extends Controller
         $modalidades = Modalidad::all();
         $tipoInscripciones = TipoInscripcion::all();
         $statuses = StatusAlumno::all();
+        $descuentos = Descuento::all();
 
         $direccion = null;
         if($alumno->direcciones->count() >= 1){
@@ -152,7 +166,12 @@ class AlumnosController extends Controller
             $tutor = $alumno->tutor;
         }
 
-        return view('alumno.edit')->with(compact('alumno', 'direccion', 'tutor', 'carreras', 'modalidades', 'tipoInscripciones', 'statuses'));
+        $descuentosAlumno = [];
+        if(!empty($alumno->descuentos)){
+            $descuentosAlumno = $alumno->descuentos;
+        }
+
+        return view('alumno.edit')->with(compact('alumno', 'direccion', 'tutor', 'carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos', 'descuentosAlumno'));
     }
 
     public function update(Request $request, $id)
@@ -281,8 +300,12 @@ class AlumnosController extends Controller
                 $tutor->save();
             }
         }
-        
 
+        $descuentosReq = $request->input('descuentos');
+        if($descuentosReq){
+            $alumno->descuentos()->sync($descuentosReq);
+        }
+        
         return redirect('/alumno');
     }
 

@@ -3,13 +3,13 @@
 
 <div class="row wrapper border-bottom white-bg page-heading shad">
                 <div class="col-lg-9">
-                    <h2>Adeudos</h2>
+                    <h2>Precios oferta educativa</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="{{url('home')}}">Home</a>
                         </li>
                         <li class="active">
-                            <strong>Adeudos</strong>
+                            <strong>Precios oferta educativa</strong>
                         </li>
                     </ol>
                 </div>
@@ -26,20 +26,12 @@
                     </div>
                 @endif
 
-                @if($errors->any())
-                    <div class="form-group">
-                            @foreach($errors->all() as $error)
-                                <p class="alert label-danger">{{$error}}</p>
-                            @endforeach
-                    </div>
-                @endif
-
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Listado de Adeudos</h5>
+                        <h5>Listado de Precios</h5>
                         <div class="ibox-tools">
-                            <a class="btn btn-white btn-sm" href="{{ url('adeudos/create') }}">Agregar nuevo adeudo</a>
+                            <a class="btn btn-white btn-sm" href="{{ url('precios/create') }}">Agregar nuevo precio</a>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -47,44 +39,36 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>ID adeudo</th>
-                                    <th>Alumno</th>
+                                    <th>ID movimiento</th>
+                                    <th>Oferta educativa</th>
                                     <th>Concepto</th>
-                                    <th>Status</th>
-                                    <th>Monto de adeudo</th>
-                                    <th>Monto restante</th>
-                                    <th>Fecha</th>
+                                    <th>Modalidad</th>
+                                    <th>Costo</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                @foreach($adeudos as $adeudo)
+                                @foreach($costosCarrera as $costo)
                                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                         <td>
-                                            <a href="{{ url('adeudos/edit', $adeudo) }}"> {{ $adeudo->id  }}</a>
+                                            <a href="{{ url('precios/edit', $costo) }}"> {{ $costo->id  }}</a>
                                         </td>
                                         <td>
-                                            {{ $adeudo->alumno ? $adeudo->alumno->name." ".$adeudo->alumno->lastName : "" }}
+                                            {{ $costo->carrera ? $costo->carrera->name : '' }}
+                                        </td>
+                                       <td>
+                                            {{ $costo->concepto ? $costo->concepto->name : '' }}
                                         </td>
                                         <td>
-                                            {{ $adeudo->concepto ? $adeudo->concepto->name : "" }}
+                                            {{ $costo->modalidad ? $costo->modalidad->name : '' }}
                                         </td>
                                         <td>
-                                            {{ $adeudo->status ? $adeudo->status->name : "" }}
+                                            {{ $costo->costo}}
                                         </td>
-                                        <td>
-                                            {{ $adeudo->monto_pago }}
-                                        </td>
-                                        <td>
-                                            {{ $adeudo->monto_restante }}
-                                        </td>
-                                         <td>
-                                            {{ $adeudo->created_at }}
-                                        </td>
-                                    
-                                        <td>
-                                            <span class="actions-custom"><a class="yellow" href="{{ url('adeudos/pago', $adeudo) }}"> <i class="fa fa-edit yellow"></i>Pagar </a></span>    
-                                            <form style="display:inline" method="post" action="{{ url('adeudos', $adeudo)  }}">
+                                        <td>    
+                                            <span class="actions-custom"><a class="yellow" href="{{ url('precios/edit', $costo) }}"> <i class="fa fa-edit yellow"></i>Editar </a></span>
+                                            <form style="display:inline" method="post" action="{{ url('precios', $costo)  }}">
                                                 @csrf
                                                 {{method_field('DELETE')}}
                                                 <button type="submit" title="Eliminar" class="red btn-custom"><i class="fa fa-times red"></i>Eliminar</button>
@@ -120,14 +104,14 @@
                     search: "Buscar en la tabla:",
                     info:   "Mostrando del _START_ al _END_ de _TOTAL_ alumno",
                     infoEmpty:      "No existen registros, 0 elementos",
+                    emptyTable:     "Aun no existe ningun registro",
                     lengthMenu:    "Mostrar _MENU_ registros",
                     paginate: {
                         first:      "Primero",
                         previous:   "Anterior",
                         next:       "Siguiente",
                         last:       "Ultimo"
-                    },
-                    emptyTable:     "Aun no existe ningun registro",
+                    }
                 }
 
             });

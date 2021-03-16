@@ -59,6 +59,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/concepto/edit/{id}', 'ConceptoController@update'); //actualizar
     Route::delete('/concepto/{id}', 'ConceptoController@delete'); //Eliminar
 
+    //Rutas para descuentos
+    Route::get('/descuento', 'DescuentosController@index'); //Listado
+    Route::get('/descuento/create', 'DescuentosController@create'); //Crear
+    Route::post('/descuento', 'DescuentosController@store'); //Guardar 
+    Route::get('/descuento/edit/{id}', 'DescuentosController@edit'); //Editar
+    Route::post('/descuento/edit/{id}', 'DescuentosController@update'); //actualizar
+    Route::delete('/descuento/{id}', 'DescuentosController@delete'); //Eliminar
+
+    //Rutas para costos
+    Route::get('/precios', 'CostoCarreraController@index'); //Listado
+    Route::get('/precios/create', 'CostoCarreraController@create'); //Crear
+    Route::post('/precios', 'CostoCarreraController@store'); //Guardar 
+    Route::get('/precios/edit/{id}', 'CostoCarreraController@edit'); //Editar
+    Route::post('/precios/edit/{id}', 'CostoCarreraController@update'); //actualizar
+    Route::delete('/precios/{id}', 'CostoCarreraController@delete'); //Eliminar
+
     //Rutas para Alumnos
     Route::delete('/alumno/{id}', 'AlumnosController@delete'); //Eliminar
 
@@ -103,6 +119,8 @@ Route::middleware(['auth', 'cashier'])->group(function () {
     Route::get('/adeudos/edit/{id}', 'AdeudosController@edit'); //Editar
     Route::post('/adeudos/edit/{id}', 'AdeudosController@update'); //actualizar
     Route::delete('/adeudos/{id}', 'AdeudosController@delete'); //Eliminar
+
+    Route::get('/adeudos/pago/{id}', 'AdeudosController@showPagoAdeudo'); //Editar
 
     //RUTA PARA CAJA
     Route::get('/cashier/cash', 'HomeController@cash');

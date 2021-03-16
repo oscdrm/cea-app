@@ -3,6 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Alumno;
+use App\Modalidad;
+use App\Concepto;
+use App\Carrera;
+use App\Adeudo;
+use App\CostoCarrera;
+use App\Descuento;
 
 class AdeudosAlumnos extends Command
 {
@@ -36,7 +43,7 @@ class AdeudosAlumnos extends Command
      * @return int
      */
     public function handle()
-    {
+    {   
         return 0;
     }
 }

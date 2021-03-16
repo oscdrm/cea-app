@@ -81,6 +81,13 @@ class MovimientosCajaController extends Controller
 
             }
 
+            $montoPago = 0;
+            if($request->input('monto_pago_otro') != null){
+                $montoPago = $request->input('monto_pago_otro');
+            }else{
+                $montoPago = $request->input('monto_pago');
+            }
+
             $payment = new MovimientosCaja();
             $payment->alumno_id = $request->input('alumno');
             $payment->otro_alumno = $request->input('otro_alumno');
@@ -88,7 +95,7 @@ class MovimientosCajaController extends Controller
             $payment->otro_concepto = $request->input('otro_concepto');
             $payment->folio = $folio;
             //$payment->folio = $request->input('folio');
-            $payment->monto_pago = $request->input('monto_pago');
+            $payment->monto_pago = $montoPago;
             $payment->nota = $request->input('nota');
             $cashier = Auth::user()->id;
             $payment->cashier_id = $cashier;
@@ -100,12 +107,12 @@ class MovimientosCajaController extends Controller
             if(!empty($adeudo)){
                 $adeudoObj = Adeudo::find($adeudo);
                 $payment->adeudo_id = $adeudo;
-                if($adeudoObj->monto_restante == $request->input('monto_pago')){
+                if($adeudoObj->monto_restante == $montoPago){
                     $adeudoObj->status_adeudo_id = 2;
                     $adeudoObj->monto_restante = 0;
                     $adeudoObj->nota = "El alumno ha pagado el total del adeudo";
                 }else{
-                    $resto = $adeudoObj->monto_pago - $request->input('monto_pago');
+                    $resto = $adeudoObj->monto_pago - $montoPago;
                     $adeudoObj->nota = "El alumno aun adeuda un monto de: $".$resto;
                     $adeudoObj->monto_restante = $resto;
                     $adeudoObj->status_adeudo_id = 1;
@@ -137,6 +144,10 @@ class MovimientosCajaController extends Controller
     public function update(Request $request, $id)
     {
         $payment = MovimientosCaja::find($id);
+
+        $pagoAnterior = $payment->monto_pago;
+        $pagoActual = $request->input('monto_pago');
+        $diferencia = 0;
 
         $rules = [
             'monto_pago' => 'required'
@@ -184,15 +195,27 @@ class MovimientosCajaController extends Controller
             if(!empty($adeudo)){
                 $adeudoObj = Adeudo::find($adeudo);
                 $payment->adeudo_id = $adeudo;
-                if($adeudoObj->monto_restante == $request->input('monto_pago')){
-                    $adeudoObj->status_adeudo_id = 2;
-                }else{
-                    $resto = $adeudoObj->monto_pago - $request->input('monto_pago');
-                    $adeudoObj->nota = "El alumno aun adeuda un monto de: $".$resto;
-                    $adeudoObj->monto_restante = $resto;
-                    $adeudoObj->status_adeudo_id = 1;
+
+                if($pagoAnterior != $pagoActual){
+                    if($pagoActual < $pagoAnterior){
+                        $diferencia = $pagoAnterior - $pagoActual;
+                        $adeudoObj->monto_restante = $adeudoObj->monto_restante + $diferencia;
+                    }else{
+                        $diferencia = $pagoAnterior - $pagoActual;
+                        $adeudoObj->monto_restante = $adeudoObj->monto_restante - $diferencia;
+                    }
+                    $adeudoObj->save;
+
+                    if($adeudoObj->monto_restante == $request->input('monto_pago')){
+                        $adeudoObj->status_adeudo_id = 2;
+                    }else{
+                        $resto = $adeudoObj->monto_pago - $request->input('monto_pago');
+                        $adeudoObj->nota = "El alumno aun adeuda un monto de: $".$resto;
+                        $adeudoObj->monto_restante = $resto;
+                        $adeudoObj->status_adeudo_id = 1;
+                    }
                 }
-                
+
                 $adeudoObj->save();
             }
 
@@ -218,6 +241,8 @@ class MovimientosCajaController extends Controller
 
         return back();
     }
+
+    
 
 
 }

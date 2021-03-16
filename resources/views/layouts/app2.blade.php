@@ -46,6 +46,8 @@
 
     <link href="{{asset('css/plugins/dataTables/datatables.min.css')}} rel="stylesheet">
 
+    <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
+
 
     <!--  SCRIPTS INSPINIA  -->
 
@@ -104,6 +106,10 @@
    <script src="{{asset('js/plugins/sweetalert/sweetalert.min.js')}}"></script>
 
    <script src="{{asset('js/plugins/dataTables/datatables.min.js')}}"></script>
+
+   <!-- Switchery -->
+   <script src={{asset('js/plugins/switchery/switchery.js')}}></script>
+
 
 </head>
 <body>
@@ -170,6 +176,8 @@
                                 <li><a href="/modalidad">Modalidades</a></li>
                                 <li><a href="/carrera">Oferta educativa</a></li>
                                 <li><a href="/concepto">Conceptos de pago</a></li>
+                                <li><a href="/descuento">Descuentos</a></li>
+                                <li><a href="/precios">Precios de oferta educativa</a></li>
                             </ul>
                         </li>
                         @endif

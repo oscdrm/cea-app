@@ -17,7 +17,7 @@ class CreateTutorsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('lastName');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone');
             $table->string('photo')->nullable();
             $table->unsignedBigInteger('alumno_id');

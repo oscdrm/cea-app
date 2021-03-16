@@ -145,6 +145,29 @@
                         </select>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                                <label class="col-sm-2 control-label">Descuentos</label>
+                                <div class="col-sm-10">
+                                    <select data-placeholder="Selecciona un descuento" name="descuentos[]" id="descuentos" class="chosen-select" multiple  tabindex="2">
+                                        <option value="">Selecciona un descuento</option>
+                                        @foreach ($descuentos as $descuento)
+                                            <option value="{{$descuento->id}}">{{$descuento->name}}</option>
+                                        
+                                            @if(count($descuentosAlumno) > 0)
+                                                @foreach ($descuentosAlumno as $descuentoAlumno)
+                                                    @php
+                                                        if($descuento->id == $descuentoAlumno->id){
+                                                            $selected = "selected";
+                                                            echo '<option '.$selected.' value="'.$descuento->id.'">'.$descuento->name.'</option>';
+                                                        }
+                                                    @endphp
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                        </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Status</label>

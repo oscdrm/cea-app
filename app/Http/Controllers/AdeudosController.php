@@ -8,6 +8,7 @@ use App\Concepto;
 use App\Alumno;
 use App\StatusAdeudo;
 use App\Adeudo;
+use App\MetodoPago;
 
 class AdeudosController extends Controller
 {
@@ -136,6 +137,15 @@ class AdeudosController extends Controller
         $adeudo->delete();
 
         return back();
+    }
+
+    public function showPagoAdeudo($id){
+        $errors = [];
+        $adeudo = Adeudo::find($id);
+
+        $metodosPago = MetodoPago::all();
+
+        return view('adeudos.pago')->with(compact('adeudo', 'metodosPago'));
     }
 
 

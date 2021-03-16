@@ -83,6 +83,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Concepto</th>
+                                <th>Adeudo de: </th>
                                 <th>Monto</th>
                                 <th>Folio</th>
                                 <th>Fecha</th>
@@ -98,8 +99,11 @@
                                     <td>
                                          {{ $movimiento->concepto ? $movimiento->concepto->name : $movimiento->otro_concepto  }}
                                     </td>
+                                     <td>
+                                         {{ $movimiento->adeudo ? $movimiento->adeudo->name : ''  }}
+                                    </td>
                                     <td>
-                                         {{ $movimiento->monto_pago  }}
+                                         ${{ $movimiento->monto_pago  }}
                                     </td>
                                     <td>
                                          {{ $movimiento->folio ? $movimiento->folio : ''  }}
