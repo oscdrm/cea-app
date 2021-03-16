@@ -100,10 +100,11 @@
                 </div>
             </div>
                 <div class="table-responsive">
-                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" data-page-size="15">
                         <thead>
                         <tr>
                             <th>ID Adeudo</th>
+                            <th>Nombre</th>
                             <th data-hide="phone">Alumno</th>
                             <th data-hide="phone">Concepto</th>
                             <th data-hide="phone">Monto</th>
@@ -117,6 +118,9 @@
                                             <a href="{{ url('adeudos/edit', $adeudo) }}"> {{ $adeudo->id  }}</a>
                                         </td>
                                         <td>
+                                            {{ $adeudo->name ? $adeudo->name : "" }}
+                                        </td>
+                                        <td>
                                             {{ $adeudo->alumno ? $adeudo->alumno->name." ".$adeudo->alumno->lastName : "" }}
                                         </td>
                                         <td>
@@ -125,9 +129,7 @@
                                         <td>
                                             {{ $adeudo->monto_pago }}
                                         </td>
-                                        <td>
-                                            {{ $adeudo->status ? $adeudo->status->name : "" }}
-                                        </td>
+                                        
                                          <td>
                                             {{ $adeudo->created_at }}
                                         </td>
