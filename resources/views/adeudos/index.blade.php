@@ -54,6 +54,7 @@
                                     <th>Monto de adeudo</th>
                                     <th>Monto restante</th>
                                     <th>Fecha</th>
+                                    <th>Acción</th>
                                 </tr>
                                 </thead>
                                 <tbody>

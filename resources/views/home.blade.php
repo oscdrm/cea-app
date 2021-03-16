@@ -100,14 +100,16 @@
                 </div>
             </div>
                 <div class="table-responsive">
-                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" data-page-size="15">
                         <thead>
                         <tr>
                             <th>ID Adeudo</th>
+                            <th>Nombre</th>
                             <th data-hide="phone">Alumno</th>
                             <th data-hide="phone">Concepto</th>
                             <th data-hide="phone">Monto</th>
-                            <th data-hide="phone,tablet" >fecha</th>
+                            <th data-hide="phone,tablet" >Fecha</th>
+                            <th data-hide="phone,tablet" >Acción</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -115,6 +117,9 @@
                                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                         <td>
                                             <a href="{{ url('adeudos/edit', $adeudo) }}"> {{ $adeudo->id  }}</a>
+                                        </td>
+                                        <td>
+                                            {{ $adeudo->name ? $adeudo->name : "" }}
                                         </td>
                                         <td>
                                             {{ $adeudo->alumno ? $adeudo->alumno->name." ".$adeudo->alumno->lastName : "" }}
@@ -125,9 +130,7 @@
                                         <td>
                                             {{ $adeudo->monto_pago }}
                                         </td>
-                                        <td>
-                                            {{ $adeudo->status ? $adeudo->status->name : "" }}
-                                        </td>
+                                        
                                          <td>
                                             {{ $adeudo->created_at }}
                                         </td>
@@ -151,6 +154,32 @@
 </div>
 </div>
 </div>
+
+<script>
+        $(document).ready(function(){
+            $('.dataTables-example').DataTable({
+                pageLength: 25,
+                responsive: true,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [],
+                language: {
+                    search: "Buscar en la tabla:",
+                    info:   "Mostrando del _START_ al _END_ de _TOTAL_ alumno",
+                    lengthMenu:    "Mostrar _MENU_ registros",
+                    paginate: {
+                        first:      "Primero",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    }
+                }
+
+            });
+
+        });
+
+    </script>
+
 @endsection
 
 @extends('saludo')

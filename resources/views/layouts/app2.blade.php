@@ -228,8 +228,6 @@
             </div><!--END PAGE-WRAPPER-->
     </div><!--END WRAPPER-->
 
-
-
     <script>
         $(document).ready(function(){
             @yield('disbutton')
@@ -266,7 +264,8 @@
                 }
                 
             
-            });            
+            });  
+                      
     });
 
     </script>
