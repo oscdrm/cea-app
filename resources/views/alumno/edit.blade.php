@@ -236,6 +236,7 @@
                         <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
                     </div> 
                 </div>
+                @if($tutor)
                 @if($tutor->photo != null)
                     <div class="form-group">
                         <div style="position:relative;left:300px;width:200px; height:200px;">
@@ -244,6 +245,7 @@
                             </figure>
                         </div>
                     </div>
+                @endif
                 @endif
 
                 <div class="form-group">
