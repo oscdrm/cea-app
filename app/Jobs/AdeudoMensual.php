@@ -39,7 +39,7 @@ class AdeudoMensual implements ShouldQueue
      */
     public function handle()
     {   
-        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        /*$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $fecha = Carbon::now();
         $mes = $meses[($fecha->format('n')) - 1];
 
@@ -90,9 +90,9 @@ class AdeudoMensual implements ShouldQueue
                 echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             }
 
-        }
+        }*/
 
-
+        $message = 'Adeudo mensual de alumnos activos';
         Log::info($message);
     }
 }

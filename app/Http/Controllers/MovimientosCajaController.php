@@ -21,7 +21,7 @@ class MovimientosCajaController extends Controller
     public function index()
     {   
         if(Auth::user()->role_id == 1){
-            $movimientos = MovimientosCaja::orderBy('created_at', 'ASC')->get();
+            $movimientos = MovimientosCaja::orderBy('created_at', 'DESC')->get();
         }
         
         if(Auth::user()->role_id == 2){
