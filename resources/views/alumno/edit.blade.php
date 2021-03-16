@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <div style="position:relative;left:300px;width:200px; height:200px;">
                             <figure>
-                            <img style="width:100%;" src="{{asset($alumno->photo)}}">
+                            <img style="width:100%;" src="{{$alumno->photo ? asset($alumno->photo) : asset('img/profile.jpg')}}">
                             </figure>
                         </div>
                     </div>
