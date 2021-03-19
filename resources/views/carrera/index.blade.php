@@ -41,6 +41,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
+                                    <th>Nivel Academico</th>
                                     <th>Fecha de Creación</th>
                                 </tr>
                                 </thead>
@@ -53,6 +54,9 @@
                                         </td>
                                         <td>
                                             {{ $carrera->description }}
+                                        </td>
+                                        <td>
+                                            {{ $carrera->nivelAcademico ? $carrera->nivelAcademico->name : '' }}
                                         </td>
                                         <td>
                                             {{ $carrera->created_at }}

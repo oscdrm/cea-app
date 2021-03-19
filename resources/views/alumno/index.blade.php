@@ -43,6 +43,7 @@
                                     <th>Email</th>
                                     <th>Teléfono</th>
                                     <th>Fecha inscripción</th>
+                                    <th>Nivel Academico</th>
                                     <th>Carrera</th>
                                     <th>Modalidad</th>
                                     <th>Tipo Inscripción</th>
@@ -65,6 +66,9 @@
                                         </td>
                                          <td>
                                             {{ $alumno->inscription_date }}
+                                        </td>
+                                        <td>
+                                            {{ $alumno->nivelAcademico ? $alumno->nivelAcademico->name : '' }}
                                         </td>
                                          <td>
                                             {{ $alumno->carrera->name }}
