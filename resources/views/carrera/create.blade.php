@@ -46,7 +46,18 @@
                                 <div class="col-sm-12"><input name="description" type="text" class="form-control" value="{{old('description')}}"></div>
                             </div>
                         </div>
-
+                        <br>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Nivel Academico</label>
+                            <div class="col-sm-10">
+                                <select data-placeholder="Selecciona un nivel academico" id="NA" name="nivelAcademico" class="chosen-select"  tabindex="2">
+                                    <option value="">Selecciona un nivel academico</option>
+                                    @foreach ($nivelesAcademicos as $nivelAcademico)
+                                        <option value="{{$nivelAcademico->id}}">{{$nivelAcademico->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <br>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">

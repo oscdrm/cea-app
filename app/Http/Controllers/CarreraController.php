@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Carrera;
+use App\NivelAcademico;
 
 class CarreraController extends Controller
 {
@@ -15,7 +16,8 @@ class CarreraController extends Controller
     public function index(){
 
         $carreras = Carrera::all();
-        return view('carrera/index')->with(compact('carreras'));
+        $nivelesAcademicos = NivelAcademico::all();
+        return view('carrera/index')->with(compact('carreras', 'nivelesAcademicos'));
     }
 
     public function create()
@@ -56,7 +58,8 @@ class CarreraController extends Controller
     public function edit($id)
     {   
         $carrera = Carrera::find($id);
-        return view('carrera.edit')->with(compact('carrera'));
+        $nivelesAcademicos = NivelAcademico::all();
+        return view('carrera.edit')->with(compact('carrera', 'nivelesAcademicos'));
     }
 
     public function update(Request $request, $id)
