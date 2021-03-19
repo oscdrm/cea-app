@@ -10,6 +10,8 @@ use App\Alumno;
 use App\MetodoPago;
 use App\Adeudo;
 use Carbon\Carbon;
+use Image;
+use File;
 
 class MovimientosCajaController extends Controller
 {
@@ -47,7 +49,7 @@ class MovimientosCajaController extends Controller
 
     public function store(Request $request)
     {
-
+        $dt = Carbon::now();
         //Messages
         $messages = [
             'required' => 'Es necesario ingresar un valor para el campo :attribute',
@@ -121,6 +123,19 @@ class MovimientosCajaController extends Controller
                 $adeudoObj->save();
             }
 
+            $alumno_id = $request->input('alumno');
+            $img_comprobante = $request->file('comprobante_pago');
+            if(!empty($img_comprobante)){
+                $payment_comprobante = Image::make($img_comprobante);
+                $target = $alumno_id."-".$folio."-".$dt.".".$img_comprobante->getClientOriginalExtension();
+                $payment_comprobante->resize(400,600);
+                $ruta = public_path().'/img/alumnos/comprobantes/';
+                $payment_comprobante->save($ruta.$target);
+                $target = 'img/alumnos/comprobantes/'.$alumno_id."-".$folio."-".$dt.".".$img_comprobante->getClientOriginalExtension();
+                $payment->comprobante_pago = $target;
+            }
+
+
             $payment->save();
 
         }catch (Exception $e) {
@@ -153,11 +168,27 @@ class MovimientosCajaController extends Controller
             'monto_pago' => 'required'
         ];
 
+        $folio = "";
         if($payment->folio != $request->input('folio')){
             $rules = [
                 'monto_pago' => 'required',
                 'folio' => 'unique:movimientos_cajas'
             ];
+            
+            if(!empty($request->input('folio'))){
+                $folioAnterior = $payment->folio;
+                $folio = $request->input('folio');
+                $folioObj = MovimientosCaja::where('folio', '=', $folio)->count();
+    
+                if($folioObj > 0){
+                    $errors = [];
+                    $errors['folio_duplicado'] = "Este folio ya se ha registrado anteriormente";
+        
+                    return  back()->withErrors($errors);
+                }
+    
+            }
+
         }
 
         //Messages
@@ -217,6 +248,23 @@ class MovimientosCajaController extends Controller
                 }
 
                 $adeudoObj->save();
+            }
+
+            $alumno_id = $request->input('alumno');
+            $img_comprobante = $request->file('comprobante_pago');
+            if(!empty($img_comprobante)){
+                $dt = Carbon::now();
+                $previusImg = $payment->comprobante_pago;  // Value is not URL but directory file path
+                if(File::exists($previusImg)) {
+                    File::delete($previusImg);
+                }
+                $payment_comprobante = Image::make($img_comprobante);
+                $target = $alumno_id."-".$folio."-".$dt.".".$img_comprobante->getClientOriginalExtension();
+                $payment_comprobante->resize(400,600);
+                $ruta = public_path().'/img/alumnos/comprobantes/';
+                $payment_comprobante->save($ruta.$target);
+                $target = 'img/alumnos/comprobantes/'.$alumno_id."-".$folio."-".$dt.".".$img_comprobante->getClientOriginalExtension();
+                $payment->comprobante_pago = $target;
             }
 
             $payment->save();

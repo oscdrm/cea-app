@@ -26,6 +26,11 @@ class Alumno extends Model
         return $this->belongsTo('App\StatusAlumno', 'status_alumno_id');
     }
 
+    public function nivelAcademico()
+    {
+        return $this->belongsTo(NivelAcademico::class);
+    }
+
     public function tutor()
     {
         return $this->hasOne(Tutor::class);

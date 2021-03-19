@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Direccion;
 use App\Tutor;
 use App\Descuento;
+use App\NivelAcademico;
 use Image;
 
 class AlumnosController extends Controller
@@ -36,7 +37,8 @@ class AlumnosController extends Controller
         $tipoInscripciones = TipoInscripcion::all();
         $statuses = StatusAlumno::all();
         $descuentos = Descuento::All();
-        return view('alumno.create')->with(compact('carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos'));
+        $nivelesAcademicos = NivelAcademico::All();
+        return view('alumno.create')->with(compact('carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos', 'nivelesAcademicos'));
     }
 
     public function store(Request $request)
@@ -84,6 +86,7 @@ class AlumnosController extends Controller
         $alumno->email = $email;
         $alumno->phone = $request->input('phone');
         $alumno->inscription_date = Carbon::createFromFormat('d/m/Y', $request->input('inscription_date'));
+        $alumno->nivel_academico_id = $request->input('nivelAcademico');
         $alumno->carrera_id = $request->input('carrera');
         $alumno->modalidad_id = $request->input('modalidad');
         $alumno->tipo_inscripcion_id = $request->input('tipoInscripcion');
@@ -155,6 +158,7 @@ class AlumnosController extends Controller
         $tipoInscripciones = TipoInscripcion::all();
         $statuses = StatusAlumno::all();
         $descuentos = Descuento::all();
+        $nivelesAcademicos = NivelAcademico::All();
 
         $direccion = null;
         if($alumno->direcciones->count() >= 1){
@@ -171,7 +175,7 @@ class AlumnosController extends Controller
             $descuentosAlumno = $alumno->descuentos;
         }
 
-        return view('alumno.edit')->with(compact('alumno', 'direccion', 'tutor', 'carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos', 'descuentosAlumno'));
+        return view('alumno.edit')->with(compact('alumno', 'direccion', 'tutor', 'carreras', 'modalidades', 'tipoInscripciones', 'statuses', 'descuentos', 'descuentosAlumno', 'nivelesAcademicos'));
     }
 
     public function update(Request $request, $id)
@@ -219,6 +223,7 @@ class AlumnosController extends Controller
         $alumno->email = $email;
         $alumno->phone = $request->input('phone');
         $alumno->inscription_date = Carbon::createFromFormat('Y-m-d', $request->input('inscription_date'));
+        $alumno->nivel_academico_id = $request->input('nivelAcademico');
         $alumno->carrera_id = $request->input('carrera');
         $alumno->modalidad_id = $request->input('modalidad');
         $alumno->tipo_inscripcion_id = $request->input('tipoInscripcion');

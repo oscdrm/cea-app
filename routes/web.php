@@ -50,6 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/carrera/edit/{id}', 'CarreraController@edit'); //Editar
     Route::post('/carrera/edit/{id}', 'CarreraController@update'); //actualizar
     Route::delete('/carrera/{id}', 'CarreraController@delete'); //Eliminar
+    Route::get('/carrera/nivelAcademico/{id}', 'CarreraController@getByNivelAcademico'); //GetByNivelAcademico
 
     //Rutas para carreras
     Route::get('/concepto', 'ConceptoController@index'); //Listado

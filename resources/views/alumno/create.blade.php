@@ -75,13 +75,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Carrera</label>
+                    <label class="col-sm-2 control-label">Nivel Academico</label>
                     <div class="col-sm-10">
-                        <select data-placeholder="Selecciona una carrera" name="carrera" class="chosen-select"  tabindex="2">
-                            <option value="">Selecciona una carrera</option>
-                            @foreach ($carreras as $carrera)
-                                <option value="{{$carrera->id}}">{{$carrera->name}}</option>
+                        <select data-placeholder="Selecciona un nivel academico" id="NA" name="nivelAcademico" class="chosen-select"  tabindex="2">
+                            <option value="">Selecciona un nivel academico</option>
+                            @foreach ($nivelesAcademicos as $nivelAcademico)
+                                <option value="{{$nivelAcademico->id}}">{{$nivelAcademico->name}}</option>
                             @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Oferta Educativa</label>
+                    <div class="col-sm-10">
+                        <select data-placeholder="Selecciona una oferta educativa" id="carrera" name="carrera" class="chosen-select carrera"  tabindex="2">
+                            <option value="">Selecciona una oferta educativa</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -219,4 +229,8 @@
         </div><!--END CONTAINER ROW-->
 </div><!--END WRAPER-->
 
+@endsection
+
+@section('additional_scripts')
+    <script src="{{asset('js/ajax/OE.js')}}"></script>
 @endsection

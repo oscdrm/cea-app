@@ -95,4 +95,19 @@ class CarreraController extends Controller
 
         return back();
     }
-}
+
+    public function getByNivelAcademico($id){
+        
+        $carreras = Carrera::where('nivel_academico_id', '=', $id)->get();
+        $retArray = [];
+        if(!$carreras){
+            $retArray = ['data' => ''];
+            return response()->json($retArray);
+        }
+
+        $retArray = ['data' => $carreras];
+        return response()->json($retArray);
+
+    }
+
+}   

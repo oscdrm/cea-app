@@ -15,4 +15,10 @@ class Carrera extends Model
     {
         return $this->hasMany(CostoCarrera::class);
     }
+
+    public function nivelAcademico()
+    {
+        return $this->belongsTo(NivelAcademico::class);
+    }
+
 }
