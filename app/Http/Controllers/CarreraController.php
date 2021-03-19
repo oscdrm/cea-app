@@ -49,6 +49,7 @@ class CarreraController extends Controller
         $carrera = new Carrera();
         $carrera->name = $request->input('name');
         $carrera->description = $request->input('description');
+        $carrera->nivel_academico_id = $request->input('nivelAcademico');
 
         $carrera->save();
 
@@ -85,6 +86,7 @@ class CarreraController extends Controller
         $carrera = Carrera::find($id);
         $carrera->name = $request->input('name');
         $carrera->description = $request->input('description');
+        $carrera->nivel_academico_id = $request->input('nivelAcademico');
     
         $carrera->save();
 
