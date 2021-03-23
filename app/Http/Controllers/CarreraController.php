@@ -22,7 +22,8 @@ class CarreraController extends Controller
 
     public function create()
     {   
-        return view('carrera.create');
+        $nivelesAcademicos = NivelAcademico::all();
+        return view('carrera.create')->with(compact('nivelesAcademicos'));
     }
 
     public function store(Request $request)
