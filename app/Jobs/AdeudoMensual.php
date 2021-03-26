@@ -17,6 +17,8 @@ use App\CostoCarrera;
 use App\Descuento;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
+use Mail;
+use App\Mail\SendPayRemminder;
 
 class AdeudoMensual implements ShouldQueue
 {
@@ -39,7 +41,7 @@ class AdeudoMensual implements ShouldQueue
      */
     public function handle()
     {   
-        /*$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $fecha = Carbon::now();
         $mes = $meses[($fecha->format('n')) - 1];
 
@@ -56,9 +58,11 @@ class AdeudoMensual implements ShouldQueue
             $carrera = $alumno->carrera_id;
             $concepto = Concepto::find(2);
             $modalidad = $alumno->modalidad_id;
-
             $costo = CostoCarrera::where('carrera_id', '=', $carrera)->where('concepto_id', '=', $concepto->id)->where('modalidad_id', '=', $modalidad)->first();
-            $costo = $costo->costo;
+            
+            if($costo){
+               $costo = $costo->costo;
+            } 
 
             if(!empty($alumno->descuentos)){
                 $descuentosAlumno = $alumno->descuentos;
@@ -85,12 +89,16 @@ class AdeudoMensual implements ShouldQueue
                 $adeudo->status_adeudo_id = 1;
 
                 $adeudo->save();
+                if($alumno->email){
+                    Mail::to($alumno->email)->send(new SendPayRemminder());
+                }
+                
     
             }catch (Exception $e) {
                 echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             }
 
-        }*/
+        }
 
         $message = 'Adeudo mensual de alumnos activos';
         Log::info($message);

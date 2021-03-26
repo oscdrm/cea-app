@@ -79,9 +79,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //Rutas para Alumnos
     Route::delete('/alumno/{id}', 'AlumnosController@delete'); //Eliminar
 
-    //Rutas para MOvimientos Caja
-    Route::get('/movimientos/edit/{id}', 'MovimientosCajaController@edit'); //Editar
-    Route::post('/movimientos/edit/{id}', 'MovimientosCajaController@update'); //actualizar
+    
     Route::delete('/movimientos/{id}', 'MovimientosCajaController@delete'); //Eliminar
 
     //Rutas para corte
@@ -112,6 +110,9 @@ Route::middleware(['auth', 'cashier'])->group(function () {
     Route::get('/movimientos', 'MovimientosCajaController@index'); //Listado
     Route::get('/movimientos/create', 'MovimientosCajaController@create'); //Crear
     Route::post('/movimientos', 'MovimientosCajaController@store'); //Guardar 
+    //Rutas para MOvimientos Caja
+    Route::get('/movimientos/edit/{id}', 'MovimientosCajaController@edit'); //Editar
+    Route::post('/movimientos/edit/{id}', 'MovimientosCajaController@update'); //actualizar
 
     //Rutas para Adeudos
     Route::get('/adeudos', 'AdeudosController@index'); //Listado

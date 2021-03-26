@@ -79,16 +79,18 @@
                                             {{ $movimiento->cajero->userName }}
                                         </td>
                                         
-                                      @if(auth()->user()->role->id == 1)
+                                      
                                         <td>    
                                             <span class="actions-custom"><a class="yellow" href="{{ url('movimientos/edit', $movimiento) }}"> <i class="fa fa-edit yellow"></i>Editar </a></span>
+                                        @if(auth()->user()->role->id == 1)    
                                             <form style="display:inline" method="post" action="{{ url('movimientos', $movimiento)  }}">
                                                 @csrf
                                                 {{method_field('DELETE')}}
                                                 <button type="submit" title="Eliminar" class="red btn-custom"><i class="fa fa-times red"></i>Eliminar</button>
                                             </form>
+                                         @endif
                                         </td>
-                                       @endif
+                                      
                                     </tr>
                                 @endforeach
 

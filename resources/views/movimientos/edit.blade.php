@@ -93,7 +93,7 @@
                     <label class="col-sm-2 control-label">Monto: </label>
                     <div class="col-sm-10"><input name="monto_pago" type="number" min="0" class="form-control" value="{{old('monto_pago', $movimiento->monto_pago)}}"></div>
                 </div>
-
+        
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Metodo de pago: </label>
                     <div class="col-sm-10">
