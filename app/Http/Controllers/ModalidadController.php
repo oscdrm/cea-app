@@ -36,8 +36,7 @@ class ModalidadController extends Controller
 
         //Validaciones
         $rules = [
-            'name' => 'required | min:3',
-            'description' => 'required'
+            'name' => 'required | min:3'
         ];
 
         // Validator::make($request, $rules);
