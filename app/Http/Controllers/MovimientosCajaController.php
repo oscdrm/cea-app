@@ -146,6 +146,12 @@ class MovimientosCajaController extends Controller
 
     }
 
+    public function show($id)
+    {   
+        $movimiento = MovimientosCaja::find($id);
+        return view('movimientos.show')->with(compact('movimiento'));
+    }
+
     public function edit($id)
     {   
         $movimiento = MovimientosCaja::find($id);

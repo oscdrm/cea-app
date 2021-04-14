@@ -39,6 +39,7 @@
                             <table class="table table-striped table-bordered table-hover dataTables-example">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
                                     <th>Teléfono</th>
@@ -52,9 +53,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                @php
+                                    $n = 0;
+                                @endphp
                                 @foreach($alumnos as $alumno)
+                                    @php
+                                        $n++;
+                                    @endphp
                                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                        <td>
+                                            {{$n}}
+                                        </td>
                                         <td>
                                             <a href="{{ url('alumno/profile', $alumno) }}"> {{ $alumno->name  }} {{ $alumno->lastName }}</a>
                                         </td>
@@ -116,7 +125,21 @@
                 pageLength: 25,
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',
-                buttons: [],
+                buttons: [
+                    {extend: 'excel', title: 'Listado de Alumnos'},
+                    {extend: 'pdf', title: 'Listado de Alumnos'},
+                    {extend: 'print',
+                    'title': 'Listado de Alumnos',
+                     customize: function (win){
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                    }
+                    }
+                ],
                 language: {
                     search: "Buscar en la tabla:",
                     info:   "Mostrando del _START_ al _END_ de _TOTAL_ alumno",

@@ -112,6 +112,7 @@ Route::middleware(['auth', 'cashier'])->group(function () {
     Route::post('/movimientos', 'MovimientosCajaController@store'); //Guardar 
     //Rutas para MOvimientos Caja
     Route::get('/movimientos/edit/{id}', 'MovimientosCajaController@edit'); //Editar
+    Route::get('/movimientos/show/{id}', 'MovimientosCajaController@show'); //Editar
     Route::post('/movimientos/edit/{id}', 'MovimientosCajaController@update'); //actualizar
 
     //Rutas para Adeudos

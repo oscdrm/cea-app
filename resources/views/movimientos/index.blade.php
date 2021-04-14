@@ -80,8 +80,9 @@
                                         </td>
                                         
                                       
-                                        <td>    
-                                            <span class="actions-custom"><a class="yellow" href="{{ url('movimientos/edit', $movimiento) }}"> <i class="fa fa-edit yellow"></i>Editar </a></span>
+                                        <td> 
+                                            <span class="actions-custom"><a class="text-navy" href="{{ url('movimientos/show', $movimiento) }}"> <i class="fa fa-eye text-navy"></i>Detalle </a></span><br> 
+                                            <span class="actions-custom"><a class="yellow" href="{{ url('movimientos/edit', $movimiento) }}"> <i class="fa fa-edit yellow"></i>Editar </a></span><br>
                                         @if(auth()->user()->role->id == 1)    
                                             <form style="display:inline" method="post" action="{{ url('movimientos', $movimiento)  }}">
                                                 @csrf

@@ -137,7 +137,6 @@
                 buttons: [
                     {extend: 'excel', title: 'Historial de pagos'},
                     {extend: 'pdf', title: 'Historial de pagos'},
-
                     {extend: 'print',
                     'title': 'Historial de pagos',
                      customize: function (win){
