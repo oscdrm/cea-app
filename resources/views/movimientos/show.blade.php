@@ -126,9 +126,9 @@
 
                 @if($movimiento->comprobante_pago != null)
                     <div class="form-group">
-                        <div style="position:relative;left:300px;width:200px;">
+                        <div class="lightBoxGallery">
                             <figure>
-                            <img style="width:100%;" src="{{asset($movimiento->comprobante_pago)}}">
+                            <a href="{{asset($movimiento->comprobante_pago)}}" title="{{asset($movimiento->folio)}}" data-gallery=""><img src="{{asset($movimiento->comprobante_pago)}}"></a>
                             </figure>
                         </div>
                     </div>
