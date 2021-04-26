@@ -48,6 +48,8 @@
 
     <link href="{{asset('css/plugins/switchery/switchery.css')}}" rel="stylesheet">
 
+    <link href="{{asset('css/plugins/blueimp/css/blueimp-gallery.min.css')}}" rel="stylesheet">
+
 
     <!--  SCRIPTS INSPINIA  -->
 
@@ -109,6 +111,9 @@
 
    <!-- Switchery -->
    <script src={{asset('js/plugins/switchery/switchery.js')}}></script>
+
+   <!-- blueimp gallery -->
+    <script src="{{asset('js/plugins/blueimp/jquery.blueimp-gallery.min.js')}}"></script>
 
 
 </head>
