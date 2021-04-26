@@ -7,6 +7,14 @@
  *
 */
 
+body{
+  font-size:12px !important;
+}
+
+.custom-actions{
+  font-size: 11px;
+}
+
 .spinner-container{
 
   width:100%;

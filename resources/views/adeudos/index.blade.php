@@ -49,6 +49,7 @@
                                 <tr>
                                     <th>ID adeudo</th>
                                     <th>Alumno</th>
+                                    <th>Nombre adeudo</th>
                                     <th>Concepto</th>
                                     <th>Status</th>
                                     <th>Monto de adeudo</th>
@@ -68,6 +69,9 @@
                                             {{ $adeudo->alumno ? $adeudo->alumno->name." ".$adeudo->alumno->lastName : "" }}
                                         </td>
                                         <td>
+                                            {{ $adeudo->name}}
+                                        </td>
+                                        <td>
                                             {{ $adeudo->concepto ? $adeudo->concepto->name : "" }}
                                         </td>
                                         <td>
@@ -83,7 +87,7 @@
                                             {{ $adeudo->created_at }}
                                         </td>
                                     
-                                        <td>
+                                        <td class="custom-actions">
                                             <span class="actions-custom"><a class="yellow" href="{{ url('adeudos/pago', $adeudo) }}"> <i class="fa fa-edit yellow"></i>Pagar </a></span>    
                                             <form style="display:inline" method="post" action="{{ url('adeudos', $adeudo)  }}">
                                                 @csrf

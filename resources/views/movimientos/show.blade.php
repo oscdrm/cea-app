@@ -105,7 +105,7 @@
                                 disabled=""
                                 placeholder=""
                                 name="nombre"
-                                value="{{$movimiento->adeudo ? $movimiento->adeudo->concepto->name : ''}}">
+                                value="{{$movimiento->adeudo ? $movimiento->adeudo->name : ''}}">
                         <span class="help-block m-b-none">Pago de algun adeudo</span>
                     </div>
                 </div>

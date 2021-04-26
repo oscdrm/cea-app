@@ -68,10 +68,12 @@ class AdeudoMensual implements ShouldQueue
                 $descuentosAlumno = $alumno->descuentos;
 
                 foreach($descuentosAlumno as $descuento){
-                    if($descuento->concepto->id == $concepto->id){
-                        $montoDescuento = $descuento->discount;
-                        $montoDescuento = $montoDescuento / 100;
-                    }  
+                    if(!empty($descuento->concepto)){
+                        if($descuento->concepto->id == $concepto->id){
+                            $montoDescuento = $descuento->discount;
+                            $montoDescuento = $montoDescuento / 100;
+                        }  
+                    }
                 }
 
             }
@@ -89,8 +91,11 @@ class AdeudoMensual implements ShouldQueue
                 $adeudo->status_adeudo_id = 1;
 
                 $adeudo->save();
-                if($alumno->email){
-                    Mail::to($alumno->email)->send(new SendPayRemminder());
+                if(!empty($alumno->email)){
+                    $alumnoObj = "";
+                    $alumnoObj = $alumno->name." ".$alumno->lastName;
+                    $inputs = ['alumno' => $alumnoObj, 'monto' => $adeudo->monto_pago];
+                    Mail::to($alumno->email)->send(new SendPayRemminder($inputs));
                 }
                 
     
