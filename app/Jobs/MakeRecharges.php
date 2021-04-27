@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Alumno;
 use App\Adeudo;
+use App\Concepto;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Mail;
@@ -53,8 +54,8 @@ class MakeRecharges implements ShouldQueue
             try{
                 $adeudo = new Adeudo();
                 $adeudo->name = "Recargo del mes de ".$mes;
-                $adeudo->alumno_id = $adeudoaActivo->$alumno->id;
-                $adeudo->concepto_id = $adeudoaActivo->$concepto->id;
+                $adeudo->alumno_id = $adeudoaActivo->alumno->id;
+                $adeudo->concepto_id = 3;
                 $adeudo->monto_pago = $costoTotal;
                 $adeudo->monto_restante = $costoTotal;
                 $adeudo->status_adeudo_id = 1;
