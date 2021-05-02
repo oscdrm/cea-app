@@ -110,7 +110,7 @@ class AdeudoMensual implements ShouldQueue
         Log::info($message);*/
 
         $adeudo = new Adeudo();
-        $adeudo->name = "Colegiatura del mes de ".$mes;
+        $adeudo->name = "Colegiatura del mes de ";
         $adeudo->alumno_id = 5;
         $adeudo->concepto_id = 2;
         $adeudo->monto_pago = 100;
@@ -118,5 +118,6 @@ class AdeudoMensual implements ShouldQueue
         $adeudo->status_adeudo_id = 1;
 
         $adeudo->save();
+        Log::info("guardado");
     }
 }
