@@ -41,7 +41,7 @@ class AdeudoMensual implements ShouldQueue
      */
     public function handle()
     {   
-        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        /*$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $fecha = Carbon::now();
         $mes = $meses[($fecha->format('n')) - 1];
 
@@ -107,6 +107,16 @@ class AdeudoMensual implements ShouldQueue
         }
 
         $message = 'Adeudo mensual de alumnos activos';
-        Log::info($message);
+        Log::info($message);*/
+
+        $adeudo = new Adeudo();
+        $adeudo->name = "Colegiatura del mes de ".$mes;
+        $adeudo->alumno_id = 5;
+        $adeudo->concepto_id = 2;
+        $adeudo->monto_pago = 100;
+        $adeudo->monto_restante = 100;
+        $adeudo->status_adeudo_id = 1;
+
+        $adeudo->save();
     }
 }
