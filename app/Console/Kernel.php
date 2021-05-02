@@ -28,10 +28,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->job(new AdeudoMensual)->monthly();
-        //$schedule->job(new AdeudoMensual)->everyMinute();
+        //$schedule->job(new AdeudoMensual)->monthly();
+        $schedule->job(new AdeudoMensual)->everyMinute();
         //$schedule->job(new MakeRecharges)->everyMinute();
-        $schedule->job(new MakeRecharges)->monthlyOn(6, '01:00');
+        //$schedule->job(new MakeRecharges)->monthlyOn(6, '01:00');
     }
 
     /**
