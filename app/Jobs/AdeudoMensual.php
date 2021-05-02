@@ -95,7 +95,7 @@ class AdeudoMensual implements ShouldQueue
                     $alumnoObj = "";
                     $alumnoObj = $alumno->name." ".$alumno->lastName;
                     $inputs = ['alumno' => $alumnoObj, 'monto' => $adeudo->monto_pago];
-                    Mail::to($alumno->email)->send(new SendPayRemminder($inputs));
+                    //Mail::to($alumno->email)->send(new SendPayRemminder($inputs));
                 }
                 
     
