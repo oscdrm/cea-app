@@ -100,7 +100,8 @@ class AdeudoMensual implements ShouldQueue
                 
     
             }catch (Exception $e) {
-                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+                Log::info($e);
+                //echo 'Excepción capturada: ',  $e->getMessage(), "\n";
             }
 
         }
