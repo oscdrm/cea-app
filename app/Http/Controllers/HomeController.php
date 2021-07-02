@@ -33,7 +33,7 @@ class HomeController extends Controller
         $alumnosActivos = Alumno::where('status_alumno_id', '=', 1)->get();
         $alumnosActivosCount = $alumnosActivos->count();
 
-        $adeudos = Adeudo::where('status_adeudo_id', '=', 1)->paginate(15);
+        $adeudos = Adeudo::where('status_adeudo_id', '=', 1)->orderBy('id', 'DESC')->paginate(15);
         if(Auth::user()->role_id == 1){
             $movimientos = $this->consultasAdmin();
             $amountWeek = $movimientos['amountWeek'];
